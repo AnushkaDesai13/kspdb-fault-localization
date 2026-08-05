@@ -243,12 +243,23 @@ export class FaultDetector {
 
     this.activeIncidentsMap.forEach((inc, id) => {
       if (!newMap.has(id)) {
+        inc.status = 'closed';
+        inc.resolved_at = inc.resolved_at || new Date().toISOString();
+        inc.updated_at = new Date().toISOString();
         newMap.set(id, inc);
       }
     });
 
     this.activeIncidentsMap = newMap;
     return Array.from(this.activeIncidentsMap.values());
+  }
+
+  public resetAllIncidents() {
+    this.activeIncidentsMap.forEach((inc) => {
+      inc.status = 'closed';
+      inc.resolved_at = inc.resolved_at || new Date().toISOString();
+      inc.updated_at = new Date().toISOString();
+    });
   }
 
   public getIncidentById(id: string): Incident | undefined {

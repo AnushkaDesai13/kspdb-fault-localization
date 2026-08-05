@@ -234,6 +234,7 @@ app.post('/api/simulator/repair-fault', (req, res) => {
 
 app.post('/api/simulator/reset', (req, res) => {
   faultSimulator.initializeSteadyState();
+  faultDetector.resetAllIncidents();
   ticketEngine.evaluateAutoVerification();
   const incidents = faultDetector.detectFaults();
   broadcast('INCIDENTS_UPDATED', incidents);
