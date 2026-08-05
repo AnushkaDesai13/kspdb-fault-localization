@@ -232,6 +232,14 @@ app.post('/api/simulator/repair-fault', (req, res) => {
   res.json(result);
 });
 
+app.post('/api/simulator/reset', (req, res) => {
+  faultSimulator.initializeSteadyState();
+  ticketEngine.evaluateAutoVerification();
+  const incidents = faultDetector.detectFaults();
+  broadcast('INCIDENTS_UPDATED', incidents);
+  res.json({ status: 'RESET', message: 'All grid poles restored to steady-state live telemetry.' });
+});
+
 app.get('/api/simulator/active-faults', (req, res) => {
   res.json(faultSimulator.getActiveFaults());
 });

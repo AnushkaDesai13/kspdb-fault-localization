@@ -74,6 +74,24 @@ export const SimulatorControls: React.FC<SimulatorControlsProps> = ({
     }
   };
 
+  const handleResetGrid = async () => {
+    setLoading(true);
+    setLog(null);
+    try {
+      const res = await fetch('/api/simulator/reset', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await res.json();
+      setLog(`🔄 Grid Reset Complete: All 3,300+ poles restored to 100% steady state live power.`);
+      onRefresh();
+    } catch (e: any) {
+      setLog(`❌ Error: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="modal-overlay">
       <div className="modal-card">
@@ -136,7 +154,7 @@ export const SimulatorControls: React.FC<SimulatorControlsProps> = ({
         </div>
 
         {/* Repair & Auto-Verification Panel */}
-        <div className="section-box">
+        <div className="section-box" style={{ marginBottom: '14px' }}>
           <div className="section-title">3. Repair & Auto-Verify Telemetry</div>
           <div style={{ display: 'flex', gap: '10px' }}>
             <input
@@ -151,6 +169,11 @@ export const SimulatorControls: React.FC<SimulatorControlsProps> = ({
             </button>
           </div>
         </div>
+
+        {/* Reset Grid Button */}
+        <button className="btn btn-secondary" style={{ width: '100%', borderColor: '#3b82f6', color: '#60a5fa' }} onClick={handleResetGrid} disabled={loading}>
+          <RefreshCw size={16} /> Reset Entire Grid (Restore All Power to 100%)
+        </button>
       </div>
     </div>
   );
