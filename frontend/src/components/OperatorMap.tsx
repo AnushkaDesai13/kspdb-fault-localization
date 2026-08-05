@@ -60,7 +60,7 @@ export const OperatorMap: React.FC<OperatorMapProps> = ({
 
           return (
             <CircleMarker
-              key={pole.pole_id}
+              key={`${pole.pole_id}-${pole.energized}`}
               center={[pole.lat, pole.lon]}
               radius={pole.energized ? 3 : 5}
               pathOptions={{
