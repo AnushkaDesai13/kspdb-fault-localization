@@ -62,6 +62,7 @@ export function App() {
         const msg = JSON.parse(event.data);
         if (msg.event === 'INCIDENTS_UPDATED') {
           setIncidents(msg.data);
+          fetchData();
         }
       } catch (e) {
         console.error(e);
