@@ -1,0 +1,32 @@
+{
+  "name": "kspdb-fault-localization",
+  "version": "1.0.0",
+  "description": "Karnataka State Power Distribution Board - Automated Outage Localization and Control Room Platform",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc && npm --prefix frontend run build",
+    "start": "ts-node src/server.ts",
+    "dev": "concurrently \"ts-node-dev --respawn src/server.ts\" \"npm --prefix frontend run dev\"",
+    "test": "jest",
+    "seed": "ts-node src/seed/generateSeed.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.12",
+    "@types/ws": "^8.5.10",
+    "concurrently": "^8.2.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
